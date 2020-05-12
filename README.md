@@ -1,2 +1,2 @@
-# javascript
-Course JavaScript at Thinknetica online school.
+## Репозиторий для курса ["Продвинутый Javascript"](https://thinknetica.com/fullstack_javascript) от школы Thinknetica
+
