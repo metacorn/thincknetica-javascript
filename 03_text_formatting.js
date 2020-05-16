@@ -8,4 +8,4 @@ do {
 } while (input.length > 80)
 
 result += input;
-console.log(`Result is:\n\n${result}`)
+console.log(`Result is:\n\n${result}`);
