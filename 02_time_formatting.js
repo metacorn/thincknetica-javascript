@@ -2,11 +2,12 @@ let hour, minute;
 let amFlag = pmFlag = invalidInputFlag = false;
 let input = prompt('Input time:', '').toLowerCase();
 [hour, minute] = input.split(/[.:-]+/).map(s => parseInt(s));
+debugger;
 let letter_appendix = input.replace(/[^a-zA-Z]+/g, '');
 
 if (letter_appendix === 'am') {
     amFlag = true;
-} else if (letter_appendix === 'am') {
+} else if (letter_appendix === 'pm') {
     pmFlag = true;
 } else if (letter_appendix === '') {
 } else {
