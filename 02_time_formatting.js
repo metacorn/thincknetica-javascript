@@ -2,7 +2,6 @@ let hour, minute;
 let amFlag = pmFlag = invalidInputFlag = false;
 let input = prompt('Input time:', '').toLowerCase();
 [hour, minute] = input.split(/[.:-]+/).map(s => parseInt(s));
-debugger;
 let letter_appendix = input.replace(/[^a-zA-Z]+/g, '');
 
 if (letter_appendix === 'am') {
@@ -22,6 +21,7 @@ if (minute > 59) {
     invalidInputFlag = true;
 }
 
+if ((amFlag || pmFlag) && (hour === 12)) hour -= 12;
 if (pmFlag) hour += 12;
 
 if (invalidInputFlag) {
