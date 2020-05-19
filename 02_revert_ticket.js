@@ -19,7 +19,6 @@ let flights = {
         registartionEnds: makeTime(15, 0),
         countOfReservations: 1,
         countOfReverts: 0,
-        percentOfReverts: 0,
         takeOffTime: makeTime(18, 0),
         tickets: [
             {
@@ -146,9 +145,7 @@ function buyTicket(flightName, buyTime, fullName, type = 0) {
     flight.tickets.push(ticket);
 
     flight.countOfReservations += 1;
-    updatePercentOfReverts(flight);
 
-    // return Object.assign({}, ticket);
     return {
         ...ticket,
         welcome: 'Nice to choose us',
@@ -190,34 +187,34 @@ const hour = 60 * 60 * 1000; // ms
  * @param {number} nowTime текущее время
  * @returns {boolean} удалось ли отменить билет
  */
-function revertTicket(ticket, nowTime) {
+function revertTicket(ticketId, nowTime) {
     try {
-        if (!ticket.includes('-'))
+        if (!ticketId.includes('-'))
             throw new Error('Incorrect ticket number.');
 
-        let flightName = ticket.split('-')[0];
-
-        let flight = flights[flightName];
+        let flightNumber = ticketId.split('-')[0];
+        let flight = flights[flightNumber];
 
         if (!flight)
             throw new Error('Flight not found.');
 
-        let flightTicket = flight.tickets.filter(t => t.id === ticket)[0];
+        let ticket = flight.tickets.find(t => t.id === ticketId);
 
-        if (!flightTicket)
-            throw new Error('Flight has no ticket with this number.');
+        if (!ticket)
+            throw new Error('Flight has no ticket with this id.');
 
-        if (flightTicket.type === 1)
+        if (ticket.type === 1)
+            // если я правильно понял то, что написано насчёт бизнес-класса в задании
             throw new Error('Business class tickets can not be reverted.');
 
         if ((flight.takeOffTime - nowTime) < hour * 3)
             throw new Error('Take off time is less than three hours from now.');
 
-        flightTicketIndex = flight.tickets.indexOf(flightTicket);
-        flight.tickets.splice(flightTicketIndex, 1);
+        ticketIndex = flight.tickets.indexOf(ticket);
+        flight.tickets.splice(ticketIndex, 1);
         flight.countOfReverts += 1;
         flight.countOfReservations -= 1;
-        updatePercentOfReverts(flight);
+        console.log(`Ticket ${ticketId} reverted successfully.`)
         return true;
     } catch (error) {
         console.error(error);
@@ -225,10 +222,64 @@ function revertTicket(ticket, nowTime) {
     }
 }
 
-function updatePercentOfReverts(flight) {
-    if (flight.countOfReservations + flight.countOfReverts !== 0) {
-        flight.percentOfReverts = (flight.countOfReverts / (flight.countOfReservations + flight.countOfReverts)) * 100;
-    } else {
-        return 0
-    }
+/**
+ * Отчет о рейсе на данный момент
+ *
+ * @typedef {Object} Report
+ * @property {string} flightNumber Номер рейса
+ * @property {boolean} registration Доступна регистрация на самолет
+ * @property {boolean} complete Регистрация завершена или самолет улетел
+ * @property {number} countOfSeats Общее количество мест
+ * @property {number} reservedSeats Количество купленных (забронированных) мест
+ * @property {number} registeredSeats Количество пассажиров, прошедших регистрацию
+ * @property {number} countOfReservations Количество всех регистраций мест
+ * @property {number} countOfReverts Количество возвратов билетов
+ * @property {number} percentOfReverts Процент возвратов от общего числа бронирований
+ */
+
+/**
+* Функция генерации отчета по рейсу
+*
+*  * проверка рейса
+*  * подсчет
+*
+* @param {string} flightNumber номер рейса
+* @param {number} nowTime текущее время
+* @returns {Report} отчет
+*/
+function flightReport(flightNumber, nowTime) {
+    let flight = flights[flightNumber];
+
+    if (!flight)
+        throw new Error('Flight not found.');
+
+    let registration = (flight.registrationStarts < nowTime) && (nowTime < flight.registrationEnds);
+    let complete = flight.registrationEnds < nowTime;
+    let countOfSeats = flight.seats;
+    let reservedSeats = flight.tickets.length;
+    let registeredSeats = flight.tickets.filter(t => t.registrationTime).length;
+    // если честно, не понял, чем "Количество всех регистраций мест" отличается от "Количество пассажиров, прошедших регистрацию",
+    // потому не стал добавлять в отчёт. если это в задании не по ошибке, то прошу пояснить, что имеется в виду
+    let countOfReservations;
+    let countOfReverts = flight.countOfReverts;
+    // если я правильно понял, то имеется в виду процент возвращённых билетов от общего кол-ва изначально забронированных
+    // (то есть тех, которые до сих пор в брони плюс тех, которые на данный момент вернули)
+    let percentOfReverts =
+        ((registeredSeats + flight.countOfReverts) !== 0) ?
+            (countOfReverts / (reservedSeats + countOfReverts)) * 100
+        : 0
+
+    let report = {
+        flightNumber,
+        registration,
+        complete,
+        countOfSeats,
+        reservedSeats,
+        registeredSeats,
+        countOfReverts,
+        percentOfReverts
+    };
+
+    console.table(report);
+    return (report);
 }
