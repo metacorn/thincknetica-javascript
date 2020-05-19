@@ -21,8 +21,8 @@ function encodeText(text) {
     }).join(' ');
 
     let result = {
-        dictionary: dictionary,
-        encodedText: encodedText
+        dictionary,
+        encodedText
     }
 
     return result;
