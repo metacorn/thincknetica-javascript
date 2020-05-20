@@ -3,7 +3,7 @@ function encodeText(text) {
     let words = text.split(' ');
 
     for (let i = 0; i < words.length; i++) {
-        let existing_record = dictionary.filter(record => record.word === words[i])[0];
+        let existing_record = dictionary.find(record => record.word === words[i]);
 
         if (!existing_record) {
             do {
@@ -17,8 +17,8 @@ function encodeText(text) {
     }
 
     let encodedText = words.map(function(word) {
-        return dictionary.filter(record => record.word === word)[0].code;
-    }).join(' ');
+        return dictionary.find(record => record.word === word).code;
+    }).join(',');
 
     let result = {
         dictionary,
