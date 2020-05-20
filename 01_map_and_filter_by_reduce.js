@@ -1,18 +1,21 @@
-Array.prototype.map_by_reduce = function (callbackFunction) {
+Array.prototype.mapByReduce = function (callbackFunction) {
     if (this.length === 0) return [];
-    let result = [callbackFunction(this[0])];
-    this.reduce((acc, item) => result.push(callbackFunction(item)));
+
+    let result = this.reduce(function (acc, item) {
+        acc.push(callbackFunction(item))
+        return acc;
+    }, []);
+
     return result;
 };
 
-Array.prototype.filter_by_reduce = function (callbackFunction) {
+Array.prototype.filterByReduce = function (callbackFunction) {
     if (this.length === 0) return [];
-    let result = new Array;
-    if (callbackFunction(this[0])) result.push(this[0]);
 
-    this.reduce(function(acc, item) {
-        if (callbackFunction(item)) result.push(item);
-    });
+    let result = this.reduce(function (acc, item) {
+        if (callbackFunction(item)) acc.push(item);
+        return acc;
+    }, []);
 
     return result;
 };
