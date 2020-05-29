@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Adobe SquareShop CS 1.0</title>
+  <style>
+    table {
+      display: block;
+      margin: 20px auto;
+      max-width: 300px;
+    }
+
+    table#field tr td {
+      width: 25px;
+      height: 25px;
+      border: 1px solid gray;
+    }
+
+    table#palette tr td {
+      width: 25px;
+      height: 25px;
+      border: 1px solid lightgray;
+    }
+  </style>
+</head>
+
+<body>
+  <p>
+    <table id="field" cellspacing="0" cellpadding="0">
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+  </p>
+  <p>
+    <table id="palette" cellspacing="0" cellpadding="0">
+      <tr>
+        <td style="background-color: darkgrey"></td>
+        <td style="background-color: darkred"></td>
+        <td style="background-color: brown"></td>
+        <td style="background-color: coral"></td>
+        <td style="background-color: peru"></td>
+        <td style="background-color: goldenrod"></td>
+        <td style="background-color: darkseagreen"></td>
+        <td style="background-color: teal"></td>
+        <td style="background-color: mediumpurple"></td>
+        <td style="background-color: blueviolet;"></td>
+      </tr>
+    </table>
+  </p>
+
+  <script>
+    'use strict';
+    const field = document.getElementById('field');
+    const palette = document.getElementById('palette');
+    let paintColor = 'transparent';
+
+    field.addEventListener('click', clickOnField);
+    palette.addEventListener('click', clickOnPalette);
+
+    /**
+     * @param {MouseEvent} event
+     */
+    function clickOnField(event) {
+      if (event.target.tagName !== 'TD')
+        return;
+
+      if (event.shiftKey)
+        event.target.style.backgroundColor = 'transparent';
+      else
+        event.target.style.backgroundColor = paintColor;
+    }
+
+    /**
+       * @param {MouseEvent} event
+       */
+    function clickOnPalette(event) {
+      if (event.target.tagName !== 'TD') {
+        return;
+      } else {
+        for (let colorSelector of palette.querySelectorAll('td')) {
+          colorSelector.style.borderColor = "lightgrey";
+        }
+        event.target.style.borderColor = "black";
+        paintColor = event.target.style.backgroundColor;
+      }
+    }
+  </script>
+</body>
+
+</html>
