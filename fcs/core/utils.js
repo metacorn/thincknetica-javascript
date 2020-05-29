@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Создание таймштампа для времени
  * @param {number} hours Часы
@@ -11,11 +13,6 @@ function makeTime(hours, minutes) {
     date.setSeconds(0);
     date.setMilliseconds(0);
     return date.getTime();
-}
-
-function displayFlights() {
-    console.log('*** List of all flights ***');
-    console.table(flights);
 }
 
 function flightDetails(flightName) {

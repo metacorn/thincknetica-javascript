@@ -1,5 +1,31 @@
+'use strict';
+
+/**
+ * Объявление var variable в корне файла
+ * равносильно присвоениею в window[variable]
+ * что есть создание глобальной переменной между файлами
+ */
+
+let currentFlight = '';
+
+var displayFlights = displayFlightsInit(
+    document.getElementById('flight-list'),
+    document.getElementById('flight-list-item-template'),
+);
+
+var flightDetails = flightDetailsInit(
+    document.getElementById('flight-details'),
+    document.getElementById('tickets-list'),
+    document.getElementById('flight-details-ticket-template'),
+);
+
+function updateView() {
+    displayFlights(world.flights);
+    flightDetails(world.flights, 'BH118');
+}
+
 const result = addFlight(
-    bigWorld,
+    world.flights,
     {
         name: 'Airbus 747',
         seats: 36,
@@ -9,15 +35,9 @@ const result = addFlight(
     'BH118',
 );
 
-bigWorld = result.world;
+let res = buyTicket(world.flights, 'BH118', makeTime(5, 10), 'Petrov I. I.');
 
-console.log(bigWorld)
+let res2 = buyTicket(world.flights, 'BH118', makeTime(5, 10), 'Ivanov I. I.');
 
-let res = buyTicket(bigWorld, 'BH118', makeTime(5, 10), 'Petrov I. I.');
 
-bigWorld = res.world;
-console.log(bigWorld);
-
-let res2 = buyTicket(bigWorld, 'BH118', makeTime(5, 10), 'Ivanov I. I.');
-
-console.log(bigWorld, res2.world);
+updateView();

@@ -1,10 +1,14 @@
+'use strict';
+
 /**
  * @type {World} Список всех рейсов
  */
-let bigWorld = {
+const world = {
     flights: {},
     history: [],
 };
+
+window['world'] = world;
 
 /**
  * @typedef {Object} World

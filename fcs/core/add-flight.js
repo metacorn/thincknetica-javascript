@@ -1,3 +1,5 @@
+'use strict';
+
 const CHARCODE_A = 'A'.charCodeAt(0);
 
 /**
@@ -8,26 +10,26 @@ const CHARCODE_A = 'A'.charCodeAt(0);
  *   * вычисление времени регистрации
  *   * подготовка структуры Flight
  *
- * @param {World} world Информация о самолете
+ * @param {World.flights} flights Все рейсы
  * @param {Airliner} airliner Информация о самолете
  * @param {number} time Время вылета
- * @param {string} name Имя рейса
- * @returns { {world: World, flight: Flight} }
+ * @param {string?} name Имя рейса
+ * @returns {Flight} Рейс
  */
-function addFlight(world, airliner, time, name) {
+function addFlight(flights, airliner, time, name) {
     /// @type {Flight}
 
-    while(name in world.flights) {
+    while (name in flights) {
         name = [
             String.fromCharCode(CHARCODE_A + random(0, 26)),
             String.fromCharCode(CHARCODE_A + random(0, 26)),
             random(100, 999)
         ].join('');
-        console.log(name);
-    };
+    }
 
-    console.log(name);
-
+    /**
+     * @type Flight
+     */
     const flight = {
         name,
         seats: airliner.seats,
@@ -37,20 +39,7 @@ function addFlight(world, airliner, time, name) {
         tickets: [],
     };
 
-    /// @type {World}
-    const newWorld = {
-        flights: {
-            ...world.flights,
-            [name]: flight,
-        },
-        history: [
-            ...world.history,
-            world,
-        ],
-    };
+    flights[name] = flight;
 
-    return {
-        world: newWorld,
-        flight,
-    };
+    return flight;
 }

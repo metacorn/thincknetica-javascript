@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Поиск свободного места нужного типа
  *
@@ -51,15 +53,18 @@ function findAvailableSeat(flight, type) {
  * * проверка возможности купить (время и наличие мест)
  * * сохранение данных билета в информации о рейсе
  *
- * @param {World} world Мир
+ * @param {World.flights} flights Все рейсы
  * @param {string} flightName Номер рейса
  * @param {number} buyTime Время покупки
  * @param {string} fullName Имя пассажира
  * @param {number} type Тип места
  * @returns { {world: World, ticket: Ticket} } Возвращаем копию билета
  */
-function buyTicket(world, flightName, buyTime, fullName, type = 0) {
-    const flight = world.flights[flightName];
+function buyTicket(flights, flightName, buyTime, fullName, type = 0) {
+    /**
+     * @type {Flight}
+     */
+    const flight = flights[flightName];
 
     if (!flight)
         throw new Error('Flight not found');
@@ -76,7 +81,7 @@ function buyTicket(world, flightName, buyTime, fullName, type = 0) {
 
     let id, exists;
     do {
-        id = flight.name + '-' + flight.tickets.length; // Math.random().toString().substr(2, 3);
+        id = flight.name + '-' + (flight.tickets.length + 1); // Math.random().toString().substr(2, 3);
         exists = flight.tickets.find(item => item.id === id);
     } while (exists);
 
@@ -93,28 +98,7 @@ function buyTicket(world, flightName, buyTime, fullName, type = 0) {
         seat,
     };
 
-    const tickets = [
-        ...flight.tickets,
-        ticket,
-    ];
+    flight.tickets.push(ticket);
 
-    const newFlight = {
-        ...flight,
-        tickets,
-    };
-
-    const flights = {
-        ...world.flights,
-        [flightName]: newFlight,
-    };
-
-    const newWorld = {
-        ...world,
-        flights,
-    };
-
-    return {
-        world: newWorld,
-        ticket,
-    }
+    return {...ticket}; // копируем, что бы "пассажир" случайно ничего не изменил в самой информации о рейсе
 }
