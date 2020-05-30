@@ -63,6 +63,33 @@
     </form>
 </div>
 
+<div id=" buy-ticket-block">
+  <h2>Buy ticket!</h2>
+  <form id="buy-ticket-form">
+    <p>
+      <input name="flightName" placeholder="Please enter flight name">
+    </p>
+    <p>
+      <input name="fullName" placeholder="Please enter your full name">
+    </p>
+    <p>
+      <label for="cars">Please choose ticket type:</label><br>
+      <select name="type">
+        <option value="0" selected>Economy</option>
+        <option value="1">Business</option>
+      </select>
+    </p>
+    <p>
+      Input your time:<br>
+      <input name="hour" type="number" placeholder="Hour"><br>
+      <input name="minute" type="number" placeholder="Minute"><br>
+    </p>
+    <p>
+      <button type="submit">Buy</button>
+    </p>
+  </form>
+</div>
+
 <script src="core/main.js"></script>
 <script src="core/utils.js"></script>
 <script src="core/add-flight.js"></script>
@@ -74,6 +101,7 @@
 <script src="display-flights.js"></script>
 <script src="flight-details.js"></script>
 <script src="e-registration.form.js"></script>
+<script src="buy-ticket.form.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

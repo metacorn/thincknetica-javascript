@@ -1,22 +1,22 @@
-const form = document.getElementById('e-registration-form');
+const eRegistrationForm = document.getElementById('e-registration-form');
 
-form.addEventListener('submit', submitHandler);
+eRegistrationForm.addEventListener('submit', eRegistrationFormSubmitHandler);
 
 /**
  * Обработчик отправки формы
  * @param {KeyboardEvent} event
  */
-function submitHandler(event) {
+function eRegistrationFormSubmitHandler(event) {
     // прерываем всплытие что бы форма не отправлялась
     event.preventDefault();
 
-    const formData = {
-        ticket: form.elements.ticket.value,
-        fullName: form.elements.fullname.value,
+    const eRegistrationFormData = {
+        ticket: eRegistrationForm.elements.ticket.value,
+        fullName: eRegistrationForm.elements.fullname.value,
     };
 
     try {
-        eRegistration(world.flights, formData.ticket, formData.fullName);
+        eRegistration(world.flights, eRegistrationFormData.ticket, eRegistrationFormData.fullName);
         alert('You successfully registered');
     } catch (error) {
         console.error(error);
