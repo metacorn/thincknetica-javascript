@@ -4,7 +4,7 @@
  *  * проверка передаваемых параметров на соответствие требуемым типам данных
  *
  * @param {string} number номер группы
- * @returns {Group} созданный объект класса Student
+ * @returns {Group} созданный объект класса Group
  */
 
 function Group(number) {
