@@ -42,7 +42,7 @@ function Student (fullName) {
             console.log('The student is present already.');
             return false;
         } else {
-            _isPresent = екгу;
+            _isPresent = true;
             return true;
         }
     }
