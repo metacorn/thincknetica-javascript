@@ -4,8 +4,8 @@
  *  * проверка передаваемых параметров на соответствие требуемым типам данных
  *
  * @param {string} name имя корабля
- * @param {number} enginePower количество мачт корабля
- * @param {number} enginePower площадь парусов корабля
+ * @param {number} mastCount количество мачт корабля
+ * @param {number} sailsArea площадь парусов корабля
  * @returns {SailingShip} созданный объект класса SailingShip
  */
 
