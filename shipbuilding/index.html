@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>Testing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
+    <script>mocha.setup('bdd');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
+    <script>
+      var assert = chai.assert;
+      var expect = chai.expect;
+    </script>
+
+    <script type="application/javascript" src="ships/ship.js"></script>
+    <script type="application/javascript" src="ships/subclasses/power_ship.js"></script>
+    <script type="application/javascript" src="ships/subclasses/sailing_ship.js"></script>
+
+    <script type="application/javascript" src="shipyards/shipyard.js"></script>
+    <script type="application/javascript" src="shipyards/subclasses/power_shipyard.js"></script>
+    <script type="application/javascript" src="shipyards/subclasses/sailing_shipyard.js"></script>
+
+    <script type="application/javascript" src="service/check_params/shipyards/shipyard.js"></script>
+    <script type="application/javascript" src="service/check_params/ships/power_ship.js"></script>
+    <script type="application/javascript" src="service/check_params/ships/sailing_ship.js"></script>
+
+    <script type="application/javascript" src="ships/ship.test.js"></script>
+    <script type="application/javascript" src="ships/subclasses/power_ship.test.js"></script>
+    <script type="application/javascript" src="ships/subclasses/sailing_ship.test.js"></script>
+    <script type="application/javascript" src="shipyards/shipyard.test.js"></script>
+    <script type="application/javascript" src="shipyards/subclasses/power_shipyard.test.js"></script>
+    <script type="application/javascript" src="shipyards/subclasses/sailing_shipyard.test.js"></script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+
+    <script>
+      mocha.run();
+    </script>
+  </body>
+</html>
