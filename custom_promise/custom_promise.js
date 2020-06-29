@@ -22,16 +22,16 @@ class CustomPromise {
         let nextCustomPromise = new CustomPromise((resolve, reject) => {
             const execute = (result) => {
                 try {
-                    if (successCallback) resolve(successCallback(result));
-                    if (errorCallback) reject(errorCallback(result));
+                    if (successCallback) { resolve(successCallback(result)) };
+                    if (errorCallback) { reject(errorCallback(result)) };
                 } catch(error) {
                     reject(error)
                 }
             }
 
-            if (successCallback) this.__successCallbacks__.push(execute);
-            if (errorCallback) this.__errorCallbacks__.push(execute);
-            if (this.__state__ === 'fulfilled' || this.__state__ === 'rejected') execute(this.__result__);
+            if (successCallback) { this.__successCallbacks__.push(execute) };
+            if (errorCallback) { this.__errorCallbacks__.push(execute) };
+            if (this.__state__ === 'fulfilled' || this.__state__ === 'rejected') { execute(this.__result__) };
         });
 
         return nextCustomPromise;
